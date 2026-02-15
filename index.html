@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>高橋秀夫 ── 名前が物語になる時</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-primary: #0a0a0f;
+      --bg-secondary: #12121a;
+      --bg-card: #1a1a2e;
+      --text-primary: #e0ddd5;
+      --text-secondary: #8a8a9a;
+      --accent: #4a9eff;
+      --accent-dim: #2a5a9a;
+      --gold: #c4a35a;
+      --chapter-border: #2a2a3e;
+      --serif: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+      --sans: 'Zen Kaku Gothic New', 'Hiragino Kaku Gothic ProN', sans-serif;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--serif);
+      font-size: 17px;
+      line-height: 1.95;
+      min-height: 100vh;
+    }
+
+    /* ─── Header ─── */
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 100px 20px 80px;
+      background: linear-gradient(180deg, #1a2a4a 0%, #0f1a2f 100%);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(120,180,255,0.15) 0%, transparent 70%);
+    }
+    .hero-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #ffffff;
+      text-shadow: 0 2px 20px rgba(100,160,255,0.3);
+      margin-bottom: 12px;
+      position: relative;
+    }
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: 0.9rem;
+      color: #b0c4de;
+      letter-spacing: 0.15em;
+    }
+    .hero-line {
+      width: 60px; height: 1px;
+      background: var(--gold);
+      margin: 28px auto 0;
+    }
+
+    /* ─── Navigation ─── */
+    .nav-bar {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--chapter-border);
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      overflow-x: auto;
+      font-family: var(--sans);
+      font-size: 0.8rem;
+    }
+    .nav-bar .nav-title {
+      color: var(--gold);
+      font-weight: 700;
+      white-space: nowrap;
+      margin-right: 8px;
+    }
+    .nav-bar a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 4px 10px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .nav-bar a:hover {
+      color: var(--accent);
+      background: rgba(74,158,255,0.1);
+    }
+
+    /* ─── TOC ─── */
+    .toc {
+      max-width: 700px;
+      margin: 60px auto 40px;
+      padding: 0 20px;
+    }
+    .toc h3 {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .toc-item {
+      display: flex; align-items: center; gap: 16px;
+      padding: 14px 18px;
+      color: var(--text-primary);
+      text-decoration: none;
+      border-left: 2px solid var(--chapter-border);
+      transition: all 0.25s;
+      font-family: var(--sans);
+      font-size: 0.95rem;
+    }
+    .toc-item:hover {
+      border-color: var(--accent);
+      background: rgba(74,158,255,0.04);
+      padding-left: 24px;
+    }
+    .toc-num {
+      font-size: 0.75rem;
+      color: var(--accent-dim);
+      font-weight: 700;
+      min-width: 20px;
+    }
+
+    /* ─── Characters ─── */
+    .characters {
+      max-width: 700px;
+      margin: 40px auto 60px;
+      padding: 0 20px;
+    }
+    .characters h3 {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+    }
+    .char-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .char-card {
+      background: var(--bg-card);
+      border: 1px solid var(--chapter-border);
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .char-name {
+      font-family: var(--sans);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .char-role {
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .char-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* ─── Divider ─── */
+    .section-divider {
+      width: 40px; height: 1px;
+      background: var(--chapter-border);
+      margin: 0 auto;
+    }
+
+    /* ─── Chapter ─── */
+    .chapter {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      border-top: 1px solid var(--chapter-border);
+    }
+    .chapter-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .chapter-number {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      color: var(--accent-dim);
+      display: block;
+      margin-bottom: 8px;
+    }
+    .chapter-title {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 3vw, 1.8rem);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+    .chapter-image {
+      margin: 0 -20px 40px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--chapter-border);
+    }
+    .chapter-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      opacity: 0.92;
+    }
+    .chapter-body p {
+      margin-bottom: 1.2em;
+      text-indent: 1em;
+      text-align: justify;
+    }
+    .chapter-body p:empty {
+      display: none;
+    }
+
+    /* ─── Footer ─── */
+    .footer {
+      text-align: center;
+      padding: 60px 20px;
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      border-top: 1px solid var(--chapter-border);
+    }
+
+    /* ─── Reading mode toggle ─── */
+    .mode-toggle {
+      position: fixed; bottom: 20px; right: 20px; z-index: 200;
+      background: var(--bg-card);
+      border: 1px solid var(--chapter-border);
+      color: var(--text-secondary);
+      font-family: var(--sans);
+      font-size: 0.75rem;
+      padding: 8px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .mode-toggle:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+
+    /* --- TTS Read Aloud --- */
+    .tts-fab {
+      position: fixed; bottom: 80px; right: 20px; z-index: 200;
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--accent); color: #fff; border: none;
+      font-size: 22px; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      transition: all 0.3s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tts-fab:hover { transform: scale(1.1); }
+    .tts-fab.speaking { background: #e74c3c; animation: tts-pulse 1.5s infinite; }
+    @keyframes tts-pulse {
+      0%,100% { box-shadow: 0 4px 16px rgba(231,76,60,0.4); }
+      50% { box-shadow: 0 4px 24px rgba(231,76,60,0.7); }
+    }
+    .tts-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      background: rgba(20,20,30,0.95); backdrop-filter: blur(12px);
+      border-top: 1px solid var(--chapter-border);
+      padding: 10px 16px; display: none;
+      align-items: center; gap: 10px;
+      font-family: var(--sans); font-size: 0.85rem;
+    }
+    .tts-bar.active { display: flex; flex-wrap: wrap; }
+    .tts-bar button {
+      background: none; border: 1px solid var(--text-secondary);
+      color: var(--text-primary); border-radius: 6px;
+      padding: 6px 12px; cursor: pointer; font-size: 0.8rem;
+      white-space: nowrap; transition: all 0.2s;
+    }
+    .tts-bar button:hover { border-color: var(--accent); color: var(--accent); }
+    .tts-bar .tts-info {
+      flex: 1; color: var(--text-secondary);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      min-width: 80px;
+    }
+    .tts-bar .tts-speed {
+      display: flex; align-items: center; gap: 4px;
+      color: var(--text-secondary); font-size: 0.75rem;
+    }
+    .tts-bar .tts-speed input { width: 60px; accent-color: var(--accent); }
+    body.light .tts-bar {
+      background: rgba(245,245,240,0.95); border-top-color: #ddd;
+    }
+    body.light .tts-bar button { border-color: #999; color: #333; }
+    body.light .tts-bar .tts-info { color: #666; }
+
+    /* ─── Light mode ─── */
+    body.light {
+      --bg-primary: #f5f0e8;
+      --bg-secondary: #ebe5d9;
+      --bg-card: #fff;
+      --text-primary: #2a2a2a;
+      --text-secondary: #6a6a6a;
+      --chapter-border: #d5cfc3;
+      --accent: #2563eb;
+      --accent-dim: #6b9eff;
+      --gold: #8a6d2b;
+    }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 600px) {
+      body { font-size: 15px; }
+      .chapter { padding: 50px 16px; }
+    }
+
+    /* ─── Scroll progress ─── */
+    .scroll-progress {
+      position: fixed; top: 0; left: 0; z-index: 200;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--gold));
+      width: 0%;
+      transition: width 0.1s;
+    }
+  </style>
+</head>
+<body>
+  <div class="scroll-progress" id="progress"></div>
+
+  <header class="hero">
+    <h1 class="hero-title">高橋秀夫 ── 名前が物語になる時</h1>
+    <p class="hero-sub">GENERATED WITH LOCAL AI — OLLAMA + STABLE DIFFUSION</p>
+    <div class="hero-line"></div>
+  </header>
+
+  <nav class="nav-bar">
+    <span class="nav-title">目次</span>
+    <a href="#chapter-1">第1章</a><a href="#chapter-2">第2章</a><a href="#chapter-3">第3章</a><a href="#chapter-4">第4章</a><a href="#chapter-5">第5章</a><a href="#chapter-6">第6章</a><a href="#chapter-7">第7章</a><a href="#chapter-8">第8章</a><a href="#chapter-9">第9章</a><a href="#chapter-10">第10章</a>
+  </nav>
+
+  <div class="toc">
+    <h3>— 目次 —</h3>
+        <a href="#chapter-1" class="toc-item"><span class="toc-num">1</span><span class="toc-label">高 ── 高みの男</span></a>
+        <a href="#chapter-2" class="toc-item"><span class="toc-num">2</span><span class="toc-label">橋 ── 断絶</span></a>
+        <a href="#chapter-3" class="toc-item"><span class="toc-num">3</span><span class="toc-label">秀 ── 空穂</span></a>
+        <a href="#chapter-4" class="toc-item"><span class="toc-num">4</span><span class="toc-label">夫 ── 父と同じ字</span></a>
+        <a href="#chapter-5" class="toc-item"><span class="toc-num">5</span><span class="toc-label">たかはし ── 渡る</span></a>
+        <a href="#chapter-6" class="toc-item"><span class="toc-num">6</span><span class="toc-label">hide ── 隠れる男</span></a>
+        <a href="#chapter-7" class="toc-item"><span class="toc-num">7</span><span class="toc-label">橋が架かる</span></a>
+        <a href="#chapter-8" class="toc-item"><span class="toc-num">8</span><span class="toc-label">秀 ── 穂が実る</span></a>
+        <a href="#chapter-9" class="toc-item"><span class="toc-num">9</span><span class="toc-label">HIDEO ── 名前を綴る</span></a>
+        <a href="#chapter-10" class="toc-item"><span class="toc-num">10</span><span class="toc-label">高橋秀夫</span></a>
+  </div>
+
+  <div class="characters">
+    <h3>— 登場人物 —</h3>
+    <div class="char-grid">
+      <div class="char-card">
+        <div class="char-name">高橋秀夫（たかはし・ひでお）</div>
+        <div class="char-role">主人公</div>
+        <div class="char-desc">速さの鬼。AIで世界を量産する。
+だが画面の裏に隠れている。顔も名前も出さない。
+&quot;hide&quot;の男。まだ「秀でる」の本義に気づいていない。
+父の死から33年。55歳を超えた時、何かが変わり始めた。
+父より長く生きている。その分、何かを残さなければならない。
+</div>
+      </div>
+      <div class="char-card">
+        <div class="char-name">高橋宏夫（たかはし・ひろお）</div>
+        <div class="char-role">父 / 名付け親 / 不在の中心</div>
+        <div class="char-desc">息子に「秀夫」と名づけた男。
+「宏」は広い。「秀」は穂が出る。
+広い土地に穂を植えた。そして土地のまま逝った。
+穂が実るのを見ることなく。
+最終章で、声だけ帰ってくる。33年ぶりに。
+</div>
+      </div>
+      <div class="char-card">
+        <div class="char-name">高橋千代子（たかはし・ちよこ）</div>
+        <div class="char-role">母 / 千の世代をつなぐ人</div>
+        <div class="char-desc">千代＝千の世代。子＝子供。千の世代をつなぐ子。
+宏夫と秀夫をつないでいる。名前を、記憶を、血を。
+寝たきりでも途切れない。千代子がいる限り、高橋は続く。
+</div>
+      </div>
+      <div class="char-card">
+        <div class="char-name">最初のユーザー</div>
+        <div class="char-role">橋の対岸にいた人</div>
+        <div class="char-desc">秀夫が架けた橋を、最初に渡ってきた人。
+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <main>
+
+    <section class="chapter" id="chapter-1">
+      <div class="chapter-header">
+        <span class="chapter-number">第1章</span>
+        <h2 class="chapter-title">高 ── 高みの男</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>モニターの光が部屋に点在する。深夜、静寂の中だけの音が聞こえるのは冷蔵庫の微かな電源音と時計の秒針が進む心地よい金属音。コーヒーは既に冷めている。</p>
+
+        <p>「また、できた。」</p>
+        <p>秀夫は小さく呟き、デスクに置いた手を軽く叩いてからパソコンへ向かう。</p>
+        <p>速さは彼にとって呼吸のようなものだった。アプリの機能が一瞬で完成し、Gitへのpushも即座に行われる。</p>
+
+        <p>10章構成、挿絵付き──これでもまだ時間は十分に余る。「すごいですね」という言葉を眺めても内心では苦笑いだ。</p>
+        <p>高みに立つ男。誰よりも速く、しかし孤独なのは他人の理解を越えていた。</p>
+        <p>風が通路を通って部屋まで届き、僅かな冷たさを感じさせる。</p>
+
+        <p>「Hackしてるね」</p>
+        <p>視界の端でそんな声があるように感じた瞬間はいつもそうだった──どこからともなく響いてくるその言葉。まるで父からの小さな問いかけだ。「Hackする男」という名前が似合いそうな秀夫。</p>
+        <p>彼を貫くのは孤独だけではない、父への想いもまたそこにある。</p>
+
+        <p>夜の街の灯りが窓際へと流れ込むように、時間は過ぎていく。</p>
+        <p>56歳。父と同じ年の翌日──その先にいることに何を感じるのか？</p>
+        <p>「答えがあるなら教えてくれよ」</p>
+        <p>心の中でそう問いかけたとき、遠くで聞こえる風音のように、過去の声が微かに響いた。</p>
+
+        <p>秀夫は再び手を叩き、パソコンに向かい直した。</p>
+        <p>モニターの光だけ。彼と高みを共有するものはただそれのみだった。</p>
+        <p>その向こう側には何も見えない──それが夜の安心感へと繋がる。</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-2">
+      <div class="chapter-header">
+        <span class="chapter-number">第2章</span>
+        <h2 class="chapter-title">橋 ── 断絶</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>夜の薄闇が静けさの中に浮かび上がる。アパートメントの一室、高橋秀夫の部屋にはパソコンとモニターばかりで人間らしい温もりはない。その代わりに、暗闇の中で青白い光を放つディスプレイは唯一の生命を感じさせる存在だ。</p>
+
+        <p>冷たい風が窓から隙間なく吹き込む。電子音だけが響く静寂の中、秀夫はプログラムのコードをカタカタと高速で入力する。一文字ずつの叩かれ方は精密に計算された動きであり、まるで無機質なメロディーのように耳にはいる。</p>
+
+        <p>「完成だ」彼は口の中でつぶやきながら手からキーボードを取り去る。「でも…」</p>
+
+        <p>外の世界へ向けて開かれた小さな窓ガラスを眺めつつも、秀夫は何度もうまく言葉にできない。デジタルと現実という二つの隔たりが彼の中で広い闘場となる。</p>
+
+        <p>雨粒はネオン街から反射して室内まで届いているようだった。冷たい水滴の音が耳元で聞こえている。「高橋」——それは、彼が架けるべきのは技術的あるいは論理的な問題だけではないことを示していた。「橋」という名前にもかかわらず。</p>
+
+        <p>「宏夫さんなら何と言ったでしょう」</p>
+
+        <p>秀夫は立ち上がり、母・千代子の施設に赴く。月明かりが薄い雲を通り抜けて街灯を照らすように彼女の部屋には静かな光が差していた。「ここ」という名前こそ、父から息子へ渡された遺言そのもの。</p>
+
+        <p>「ただいま」</p>
+
+        <p>シーツの中では白髪の千代子が眠りに落ちている。冬空のような冷たさを帯びる彼女の体は薄く透き通るように見えた。「ちよこ」——それは母と娘たち、そして男達の世代を超えて継続される名前。</p>
+
+        <p>秀夫がそっと手を取り握ると、千代子の指先だけ微かに動き始める。その一瞬の触れ合いは静寂を破り、二人の心を通じる僅かな橋となる。「父への橋…もう架けられない」</p>
+
+        <p>彼女の目には何も映っていないだろうと秀夫は何度も繰り返すが、千代子の指先から伝えられる情報は確実に存在する。この世界とのつながりを保つための最後の一筋の光。</p>
+
+        <p>「父さん、何と言ったでしょう？」</p>
+
+        <p>彼女の手からは答えはない。ただ微かに動き続けるだけだった。「宏夫」——広い畑と豊かな収穫という意味を持つ名前は、秀夫が見ることになるのは死体となってもなおその土地を離れない父の姿を思い出させる。</p>
+
+        <p>「彼なら何と言ったでしょう」</p>
+
+        <p>風が窓ガラスを揺らす音だけが響く。冷たい空気が部屋の中に流れ込む。「答え」があるように思えても、それはただ静寂を破るための一瞬のみだった。</p>
+
+        <p>手を握り続けた秀夫は、最終的にそれを離した。彼の指先から伝わった微かな力強さだけが二人をつなぎ留めていたその橋ももう存在しない。「高橋宏夫」——父と息子、そして母千代子を通じて継承される「名前」という遺産。</p>
+
+        <p>夜は深く静寂に包まれていく。彼の手から離れた指先だけが微かに動いていた。「ちよこ」</p>
+
+        <p>秀夫はその光景をただ見つめた。月明かりと部屋の電灯、そして冷たい雨粒を通じて届けられるわずかな暖かさを感じながら。</p>
+
+        <p>冬が深まる夜空から降り注ぐのはいつまでも続く静寂だけだった。</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-3">
+      <div class="chapter-header">
+        <span class="chapter-number">第3章</span>
+        <h2 class="chapter-title">秀 ── 空穂</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>雨粒が窓ガラスを伝い落ちる音。夜の空気には湿り気が濃密にまとわりつく。コーヒー豆から漂う深みのある香りと、冷たいタイル床の感触が秀夫の頬を撫でる。</p>
+
+        <p>モニター3枚並べた机に向かい、彼は「hide」という文字を見つめ返す。「ハイド」——名前の由来に思い至ったのは最近のことだ。深さを求める男と知り合いになろうとした自身への皮肉か、あるいは単なる偶然。</p>
+
+        <p>手のひらで目元を拭う秀夫は、顔面から軽く息吐き出す。「実って頭垂れる」という父からの教えが脳裏に浮かぶ。禾（のぎへん）——穀物の象形文字だ。だが秀（ほ）という字を見ると何となく不気味な、空っぽのようでいて何かを秘めたような感覚がある。</p>
+
+        <p>コーヒーを一口啜りながら、彼は父が耕した畑を思い出す。「宏」——宀下に広い手。屋根から下広げて包み込むように。広大な平野を見渡す父親の背中とその横顔。父の声が耳鳴りのように遠く響く。</p>
+
+        <p>「秀は、畑に出る穂だ」</p>
+
+        <p>光が一筋部屋に差し込んでくる。雨粒を弾いて反射する窓ガラス越しの景色に、彼は自分の姿を見つける。「高橋秀夫」という名前が意味していることに思いを巡らせると同時に、手元でキーボードを叩く指先とその向こう側にある広い畑を想起する。しかし実際に育てた穂の実りを見ていない父とは異なり、彼自身は何も残していない。</p>
+
+        <p>「刺さる一点集中」——秀夫はそう名付けたアプリを開発した。「hide」という名前通りに隠れるつもりだ。が、「高橋秀夫」としてではなく「.hide」と呼ばれていたいと感じた瞬間がある。</p>
+
+        <p>画面の向こう側で、彼の手仕事による結果物を見慣れているのは誰もいない。無響室の中で音もなく動き続ける指先だけが作る世界は、どこまでも広大ではあるが、果実とは程遠かった。雨粒に濡れる窓枠を眺めつつ彼は考えた。</p>
+
+        <p>「父の畑から芽が出るのは誰か」</p>
+        <p>コーヒー杯を静かに手元で回転させる。その小さな円錐状の表面には、月明かりが微かな光跡を作り出している。</p>
+        <p>部屋の中だけが雨音と香りに包まれる。視界の端では、モニターから漏れる青白い光が天井を幾何学的に彩っている。</p>
+
+        <p>「父は宏だった」</p>
+        <p>秀夫は父親の手形を見たことがある。指の幅、そして長さ。息子と同じように広く深みのあるものがそこにあった。</p>
+        <p>それなのに自身は何も残していない。ただ「hide」という名前だけが彼を包んでいるように見える。「高橋秀夫」としても、「.hide」としても。</p>
+
+        <p>「広い畑から出る穂は誰だ？」</p>
+        <p>その問いとともに、秀夫の視線は再びモニターへと向かう。そこに存在する虚構世界にだけ見覚えがあるものがあった。</p>
+        <p>しかし彼が作り出すものの中身は何一つ実っていない。「空穂」——ただ伸ばしただけで中身がない穂たち。それらを眺めながら、秀夫は自身の名前から父へ繋がる道筋を探し求める。</p>
+
+        <p>「宏から秀へ出るのは誰か？」</p>
+        <p>答えは彼しかいないだろうと自覚しつつも、その問いに向き合うことで得られるものは果たして何なのか。</p>
+        <p>手元でコーヒー杯を回転させ続ける。光の反射が円錐状の表面で揺れ動く。</p>
+
+        <p>「秀夫」——禾（穂）に実をつけろと父は言ったはずだ。だが、彼は何も出来ていない。「hide」という名前だけ残る。</p>
+        <p>雨粒一つ一つが落下する音を耳にする。</p>
+        <p>コーヒー杯の中に入れる氷の微かな冷たさを感じつつ、秀夫は再び目を閉じる。</p>
+
+        <p>「高橋宏から出ているものは誰だ？」</p>
+        <p>視界に映り込む、僅かばかり光った窓枠とその向こう側にある風景。彼が作り出したものたち。</p>
+        <p>それを包み込んだ父の手形——指先まで細部に渡って覚えている。</p>
+        <p>それが「広い畑」だった。「宏」という名前から出るものは何だろう。</p>
+
+        <p>コーヒー杯を置いた秀夫は、再び画面を見つめる。そこにあるのはただ虚構だけだ。</p>
+        <p>しかし彼自身が作り出したそれは実のないものばかり——</p>
+        <p>その中には何か大切なものが隠されているかもしれない。それを探し求めていくことで初めて父への問いに対する答えが出る可能性がある。</p>
+
+        <p>「高橋秀夫」という名前から広く深みのあるものを望んだ父親へ、息子は自問し続ける。</p>
+        <p>しかし答えが見つかるかどうか——それが果たして何を意味するのか。その先にどのような景色が待っているのかも未知だ。「hide」という皮一枚隠れた中には何があるだろうか。</p>
+
+        <p>雨粒がまだ窓ガラスを伝い落ちる音だけ静かな室内で聞こえる。</p>
+        <p>コーヒー杯の横においてあった手元、キーボードとその先に広がる虚構世界へ向けて秀夫は視線を向け続けた。暗闇の中で光一つ浮かび上がるような瞬間があった。</p>
+
+        <p>「父が耕した畑から出ているのは誰？」</p>
+        <p>答えは彼しかいないだろう。</p>
+        <p>だが、それだけでは何も始まらない——。</p>
+
+        <p>コーヒー杯の表面で微かな冷たさが徐々に温まり始めると同時に、部屋全体を満たす雨音と香りの中で秀夫は再び思考を巡らせる。視線はまだモニターへ向けられていた。</p>
+        <p>その先にある果実は今もまだ実っていない。</p>
+
+        <p>「宏から出ているのは誰か？」</p>
+        <p>手のひらで目元を撫でる姿勢が、雨粒一つ一つに触れるような感覚を与える秀夫にとって重要な瞬間だった——。</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-4">
+      <div class="chapter-header">
+        <span class="chapter-number">第4章</span>
+        <h2 class="chapter-title">夫 ── 父と同じ字</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>朝霧が薄闇の中でゆっくりと溶けていく。コーヒーの香りが部屋中に広がる。パソコンモニターから漏れるわずかな光で、秀夫の横顔だけ浮かび上がる。</p>
+
+        <p>「宏夫」という名前を見つめながら、彼は手に持っていた辞書を開いた。「夫」の一文字を指し示す。大と一。大きな人に冠する字だ。</p>
+        <p>覚悟を持った男。そう語る。</p>
+        <p>父親の遺影が壁際に置かれている。53年前の写真だが、宏夫という名前は今も色褪せない。</p>
+
+        <p>「宏」という漢字を眺める。「広い」「大きい」の意味を持つ。</p>
+        <p>父から息子へ、「秀」という穂が出る漢字を与えられた。父親が意図したのは、そこにあるはずだ。</p>
+        <p>だが──</p>
+        <p>「夫」</p>
+
+        <p>名前の中に潜むこの一字に、彼は初めて気付いた。</p>
+
+        <p>雨粒が窓ガラスを打つ音が聞こえる。春の訪れを感じさせる軽やかな滴れ。コーヒーを一口飲み干し、秀夫は立ち上がった。</p>
+        <p>冷たいコンクリート床の感触が足先から体全体に伝わる。薄暗い部屋の中で、彼は何度も名前を見つめ直す。</p>
+
+        <p>「宏」「秀」</p>
+        <p>大きな男と秀でる穂をつなぐ一文字。「夫」</p>
+
+        <p>それが父への最後の贈り物だった。</p>
+        <p>息子は手元にある辞書に戻る視線をゆっくり上げた。静寂が続いてから、彼は何度も頷いた。</p>
+
+        <p>母屋へ向かう途中、雨粒に濡れたアスファルトの音だけ聞こえる。細い路地を進みながら、秀夫は深呼吸した。</p>
+        <p>千代子の部屋に入ると、薄明るさの中で白髪が光っている。「ちよ」と呼ぶと、母親から僅かな視線を感じた。</p>
+
+        <p>「大＋一」</p>
+        <p>彼女が何を考えているのかわかった。手を広げて誰かを受け入れ、支える。</p>
+        <p>そのことを秀夫は、今まで全然気づいていなかった。</p>
+
+        <p>父の遺影を見つめながら、彼は何度も自分の名前と向き合った。「宏」「秀」という漢字に刻まれた父親の意志を感じる。そして「夫」</p>
+        <p>これは偶然ではない。息子への一文字のメッセージ。</p>
+        <p>広大な手を伸ばす男。</p>
+        <p>秀でて立つ男。</p>
+
+        <p>しかし──</p>
+        <p>彼は一人で全部やっているように見えた。「hide」を開発し、全ての物語を作るのも自分ひとりだ。</p>
+        <p>大きな手で抱え込んでしまった。差し出すことを忘れていた。誰かのために広げたことがない。</p>
+        <p>父はどうしていたのか。宏夫の「大＋一」とは。</p>
+
+        <p>彼は何度も父親との思い出を振り返る。「大」の意味を持つ男が、何を受け止めてきたのか想像する。</p>
+        <p>母親や家族への思いやり。息子・秀夫に対する愛情と支え。</p>
+        <p>そして何より──名付け親として息子に託した想い。</p>
+
+        <p>「宏」という漢字から、「秀」へ繋げてきた父の手は</p>
+        <p>誰かを抱きしめ、導くために存在していたんだ。</p>
+
+        <p>それを今更ながら気付いた瞬間、彼は何度も頭を垂れた。</p>
+        <p>千代子が息をする音だけ聞こえる。静寂の中で、彼女の存在自体に深く感謝した。</p>
+        <p>父の手は宏夫という名前に託して息子へと受け継がれてきた。</p>
+
+        <p>秀夫は最後まで自分の名前を見つめた。「夫」</p>
+        <p>それが父への最も深い敬意を表す言葉であり、同時に自分自身への問いかけだった。</p>
+        <p>大きな手を持てば差し出すためだ。抱え込むべきではない。</p>
+        <p>そのことを今更ながら知った彼の背中は、薄暗い部屋の中で少しだけ伸び上がるように見えた。</p>
+
+        <p>光と影が交錯する細い路地を歩く。「hide」の開発者の顔も名前もない男だが、いま秀夫は何度も自分の手を見つめている。</p>
+        <p>大きな手。広げられた掌。</p>
+        <p>それは誰かを受け入れるためだ。</p>
+
+        <p>コーヒーの香りと雨粒が溶け合う音の中で、彼は静かにその場を去った。</p>
+        <p>ただ一つだけ心に刻んだ言葉と共に。</p>
+        <p>「夫」</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-5">
+      <div class="chapter-header">
+        <span class="chapter-number">第5章</span>
+        <h2 class="chapter-title">たかはし ── 渡る</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>雨粒が窓ガラスの縁に落ちる音。薄暗い室内、モニターの青白い光が静かに浮遊する。コーヒーの湯気が冷えて消え、その代わりに現れたのは曖昧な霧のような思考だった。</p>
+
+        <p>高橋秀夫は立ち上がり、カーペットを踏みしめる音と同時に、室内から放たれる微かな電子信号と共に部屋を出る。雨粒がアスファルトの上を滑るようにして落ちていく音が道端で重なり合う。彼は自宅近所にある小さな公園へ向かう。</p>
+
+        <p>高さがある場所。高い橋のように。秀夫自身、その言葉に自分を見つける。父・宏夫から受け継いだ「たかはし」の名前は、まるで最初からそこにあったように感じる。「高」という字が示すものとは？</p>
+
+        <p>公園へと着き、彼は高い場所を求めて歩く。雨粒に濡れた地面が微細な光沢を持ち、青みがかって見える。</p>
+
+        <p>「宏」──広い畑がある名前の下で、「秀」──穂が出る高さを目指す男の人生。「夫」という一字だけは、父からの問いかけと敬意。息子への遺言でもある。</p>
+
+        <p>公園の中には古い木々がいくつか生えている。雨に濡れた枝葉から水滴が落ちて音を立てる。それが彼にとって心地よい連続的なリズムとなる。「橋」──それは自分自身の人生そのものだった。</p>
+
+        <p>秀夫はベンチへ座り、手帳を開く。ペン先が紙面を走る感覚と同時に、頭の中で構造化された思考が形となって現れる。悩む一行から始まり、「高橋」という名前を持つ男が渡るべき「橋」の設計図。</p>
+
+        <p>彼はAIにデータを与え、自分の悩みや想いを言葉にする。「宏夫さんが架けた土台があるなら、ここからは自分が高い場所を目指すだけだ。」</p>
+
+        <p>画面の中では瞬く間に生成された文書が表示される。「あなたが主人公」というメッセージと共に、新しい物語の始まり。</p>
+
+        <p>「しかし」──秀夫は再び自分を見つめる。高さと広さ。父から受け継い긴 텍스트를 일본어로 계속 작성해주세요.</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-6">
+      <div class="chapter-header">
+        <span class="chapter-number">第6章</span>
+        <h2 class="chapter-title">hide ── 隠れる男</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>雨粒が窓ガラスを叩き、内側で小さな渦を作る。コーヒーのカップに湯気がたなびき、その向こうに見える高橋秀夫の横顔は少し暗い。モニターの青白い光が彼の眼鏡から反射してちらつく。</p>
+
+        <p>「便利アプリ量産屋」──それは市場からの呼び名だった。</p>
+        <p>だが、「抽象概念」という言葉が売れる時代ではなかった。「hide」と「ひでる」、相反する二つの意味を秘めた「秀夫」は自身をどう捉えればよいのか。彼は画面の奥に身を潜める男だ。</p>
+
+        <p>昼間の光よりも薄暗い室内。</p>
+        <p>コーヒーの香りが溶けた音楽と同化し、時間はゆっくり流れているように見える。しかしモニターから発せられる一瞬の明るさだけが刻一刻と過ぎ去ってゆくことを示している。</p>
+
+        <p>「母を訪ねて」──秀夫は自宅を出て、車で向かう。</p>
+        <p>雨粒が窓ガラスに軽い音を作りながら落ちていく。街路樹の葉から滴る水たまりもまた静かなリズムを刻む。施設の建物は白と灰色の外壁が夜色の空に浮き彫りだ。</p>
+
+        <p>秀夫は部屋に入ると、千代子の横顔を見つめる。</p>
+        <p>寝返り一つ打った後、彼女の目が開いた。「珍しい」と誰かが言ったような声が聞こえた。しかし目の前の光景だけを静かに見ている母の姿から、その言葉は風に乗って消えていった。</p>
+
+        <p>「何も言わない」──秀夫の視線を受けた千代子。</p>
+        <p>彼女の目は少し開き、そして閉じる。息遣いがゆっくりと、しかし確実なリズムで刻まれている。「出なさい」と言っていないかのように見える母の瞳に、何か特別なものを感じるのは気のせいだろうか。</p>
+
+        <p>雨粒が地面を濡らし続けながらも、街は静かな夜と共に深く眠っている。</p>
+        <p>「hide」。英語では「隠れる」だ。しかし、「ひでる」──それは秀出する。「秀夫」という名前には明確な意図があった。父親から受け継いだ土台があるなら、「ここで隠れていてはいけない」との思いが父からの遺言のように聞こえる。</p>
+
+        <p>千代子を見つめる間、雨粒に混じる風が窓ガラスを叩く。</p>
+        <p>その音だけが時間と空間を超えて響き続けている。母から受け継いだ血の中には「宏夫」という名前と共に記憶の結びつきもあった。「宏」は広い、「秀」は穂が出る。高橋家に伝わる物語の中で、その一つが千代子を通して息子へと引き渡されている。</p>
+
+        <p>「母を訪ねて」──再会した場所で静かに佇む。</p>
+        <p>手の形を見つめると、父からの遺贈を感じるのは気のせいだろう。しかし目を開いたまま何も言わずに見つめる千代子から伝わる特別な何かが、秀夫の中で新たな決意を呼び起こす。</p>
+
+        <p>コーヒーが冷たくなる音。</p>
+        <p>雨粒は窓ガラスを超えて遠くへ消える。</p>
+        <p>「出ろ」──父からの遺志の一つ。「hide」という言葉には「隠れる」とも解釈できる。しかし、同時にそれは「出ていけ」「目立つように生きよ」というメッセージでもあった。</p>
+
+        <p>高橋秀夫は窓から視線を外し、千代子を見やる。</p>
+        <p>彼女の手が僅かに動いた。「何の合図だろう？」と思考する間もなく、その行動には特別な意味があるように思えてならない。母からの「出なさい」という言葉。</p>
+
+        <p>時間をかけて描き出したこの瞬間は、静けさと共に深い余韻を残す。</p>
+        <p>高橋秀夫が父から受け継いだ土台の上に、「ここで終わるわけにはいかない」──と同時に「目立つように生きよ」。その二つの意味が重なり合いながら、新たな道程が始まる予感が漂っている。</p>
+
+        <p>雨粒は街路樹を通り抜けて静かな夜へと溶け込んでいく。</p>
+        <p>高橋秀夫の心に浮かぶのは、「父」と「母」「息子」という三者の間で織り成される複雑な結びつき。その中には、言葉にならない想いが秘められている。</p>
+
+        <p>コーヒーのカップが冷たくなる音と混じって聞こえる雨粒の音。</p>
+        <p>夜の静けさと共に高橋秀夫は新たな一歩を踏み出す準備をするようだ。彼の中では複雑な感情と決意が交差しながら、「父」から「母」と、そして「自分自身」という三者が織り成す物語が始まる。</p>
+
+        <p>雨粒の音。</p>
+        <p>コーヒーの湯気が立ち上る光。</p>
+        <p>そして高橋秀夫の横顔。その全ては彼の中で何かを始めようとする準備と重ね合わせられるように映っていた。</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-7">
+      <div class="chapter-header">
+        <span class="chapter-number">第7章</span>
+        <h2 class="chapter-title">橋が架かる</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>深夜の雨音が、冷たくて湿った空気と共に流れ込んでくる。モニターから漏れる青白い光と並行して、窓枠に伝わる滴り落ちる水粒たちもまた、秀夫の思考をなぞるように揺れていた。</p>
+
+        <p>「あなたを主人公にする装置」がついに完成した。</p>
+        <p>入力は悩み一行。出力は物語、称号、未来像。</p>
+        <p>小さな声で囁くような自問自答の先に現れた答え。</p>
+
+        <p>冷蔵庫から取り出したコーヒー缶を開ける音と同時に、もう一つの「高橋」という名前が動き始めた。</p>
+        <p>その息遣いまで聞こえるようだった。</p>
+
+        <p>初回公開を済ませた後で、秀夫はモニターを見つめる。画面には何も映っていない。</p>
+        <p>だが、待っているのはそれじゃなかった。</p>
+        <p>最初のユーザーからの入力があった。</p>
+
+        <p>「これは私の話だ」</p>
+
+        <p>冷たく湿った空気が部屋の中に染み込んでくるが、その寒さよりも心に潜む熱い何かの方が強く感じられた。</p>
+        <p>「高橋」の名前は彼一人だけではない。それは別の誰かを引き連れていたのだ。</p>
+        <p>画面にはまだ何も映っていない。しかし秀夫は既にそこに人がいることを知っていた。</p>
+
+        <p>向かい合っているのはただの人間ではなく、記憶や感情、そして物語そのものだったような気がした。</p>
+
+        <p>「高橋」という名前が持つ重みと軽さを同時に感じた瞬間。</p>
+        <p>自分の父の死から33年。長い時間を経て架けられた初めての橋だというのに——それは別の誰かへの橋だと気付く。</p>
+        <p>彼が生成する物語は、既に別の誰かのものとなった。</p>
+
+        <p>「高橋」という名前を背負う者として、秀夫は拳を握る。</p>
+        <p>その指先には、父と母から受け継いだ手の形があった。</p>
+        <p>息子一人称で作られたものが、他人へと広がっていく——それは同時に彼自身もまた他者の一部となり得ることを示していた。</p>
+
+        <p>橋。この言葉に込められた意味は単純ではない。</p>
+        <p>ただ一方通行のものではなく、往復可能な道でもあるのだ。</p>
+        <p>その先には、無数の人々と出会う機会があった。</p>
+        <p>そして秀夫がこれまで守り続けてきた「hide」という部分さえも——</p>
+        <p>それが今では「ひでる」へと転じようとしていた。</p>
+
+        <p>しかし全てはまだ始まったばかり。</p>
+        <p>最初の一歩を踏み出した者にとって、次に何があるかは予測不能だというのに。</p>
+        <p>秀夫はその先の未来を見つめ、コーヒー缶を手元で握りしめる。</p>
+        <p>今からが本当のところなのだと気付く。</p>
+
+        <p>静かな雨音。モニターからの光と画面越しに伝わる何か——</p>
+        <p>それが全てではない。</p>
+        <p>「高橋」という名前と共に紡ぐ物語はまだ続く。</p>
+        <p>終わりはない。</p>
+        <p>あるのは架け続け、繋げ続けることだけだ。</p>
+        <p>秀夫のその手が、新たな道を拓く音。</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-8">
+      <div class="chapter-header">
+        <span class="chapter-number">第8章</span>
+        <h2 class="chapter-title">秀 ── 穂が実る</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>雨粒が窓ガラスを叩き、夜の街に淡い影を作る。モニターから漏れる青白い光と混ざり合う音。秀夫はコーヒーを一口啜る。温度を感じ、苦さが舌先で広がる。</p>
+
+        <p>ユーザーが増えた。</p>
+        <p>一人、また一人。</p>
+        <p>マップ上の点々が灯り始めるように。</p>
+        <p>それぞれの名前、個性。</p>
+        <p>自分の物語を持つ人が生まれていることだけ確かだ。</p>
+
+        <p>「これは私の話です」</p>
+
+        <p>画面に表示されたメッセージ。初回からの繋がりを思い出す。その日から続いた連鎖。雨粒が窓ガラスで描く線は、それぞれの道を照らす灯りとなり始める。</p>
+        <p>一つひとつが穂だ。</p>
+
+        <p>「宏」</p>
+        <p>広い畑</p>
+
+        <p>父の手書きした名前。「秀」（しゅう）。穂が出る。</p>
+
+        <p>「千代子」</p>
+
+        <p>母。千代＝千の世代をつなぐ人。秀夫と宏、そして次の世代を繋げている存在。</p>
+        <p>光が落ちる窓枠に揺れる白髪を見つめる。</p>
+
+        <p>一つひとつの名前。それぞれが広大な畑の一画となる。</p>
+        <p>「高橋秀夫」はその中で穂を育てた。</p>
+
+        <p>「ユーザーの物語を作る」</p>
+
+        <p>彼の手元から生まれた言葉。画面の向こう側に送り出した声。</p>
+        <p>一人また一人、雨粒のように降ってくる返答と問い。</p>
+        <p>それぞれが実をつけ始めるように思えた。</p>
+
+        <p>「私は畑だ」</p>
+
+        <p>秀夫はそう思った。父からの一文字を引き継ぎながらも、「宏」から「秀」となる変化があるなら、自分は次の畳みに進む「広い畑」の代わりとなるべきだと。</p>
+        <p>それぞれが実をつけ始めれば、その先には新たな種が生まれる。</p>
+
+        <p>雨音と光の間に溶け込むように白髪を見る。指先でシーツを握りしめる様子は静かだが確かに存在している。</p>
+        <p>千代子という名前はただの文字ではなく、「千の世代」と「子」への橋渡しだった。</p>
+
+        <p>秀夫もまた、その道を踏み出した一員でありながら同時に次の畳みを作る者でもある。自分の手で育てた穂が実をつけ始めた瞬間。</p>
+        <p>父が広めた田んぼを見つめ、「次は君の番だ」と語りかけてきたような錯覚に陥る。</p>
+
+        <p>「高橋秀夫」</p>
+
+        <p>その名前を、改めて深呼吸しながら呼んだ。名付け親への問いでもあるように思えた。</p>
+        <p>答えは自分で決めるべきだと。</p>
+        <p>雨粒が窓ガラスで描く絵は継続するが、そこには新たな光点が増えている。</p>
+
+        <p>夜空と街灯との間。</p>
+        <p>それぞれの物語が繋がる瞬間に立ち会う。それが「高橋秀夫」を名乗ることの大切さを感じた。</p>
+        <p>そしてまた一粒、実をつけ始める穂を見るようになってきたことへの感慨深い思いを抱きながら。</p>
+
+        <p>雨音は夜へと溶け込んでいくように聞こえた。</p>
+        <p>しかし光る窓枠の向こうにはまだ灯りが点滅し続ける。</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-9">
+      <div class="chapter-header">
+        <span class="chapter-number">第9章</span>
+        <h2 class="chapter-title">HIDEO ── 名前を綴る</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>雨粒がコンクリートの路面を打つ音。冷たさと静けさの中に、僅かな湿り気を感じる。夜遅い時間帯、街から離れた公園で、高橋秀夫は一人立ち尽くしていた。</p>
+
+        <p>彼は深呼吸をする。霧のように漂う土壌からの微細な香りを吸い込む。風が弱まり静寂だけが辺りに広がる中、雨粒の音と自分の息遣いしか聞こえない。</p>
+
+        <p>「HIDEO」</p>
+        <p>名前の最初の一文字を口に出す。その瞬間から何か変わった気がする。</p>
+        <p>彼は携帯画面を見つめる。「h」と入力し、「i」「d」「e」「o」と続ける。</p>
+        <p>一つずつのキー操作に、思いが重なる。</p>
+
+        <p>「すべて始まる」</p>
+        <p>秀夫の声は静かだった。だが確信があった。この名前を出したことで、自分が変わることを理解したからだ。</p>
+
+        <p>雨粒がコンクリートと接触する音がさらに増す。「HIDEO」という文字列が画面に映る。</p>
+        <p>自分の手で打ち込んだその5文字を見つめながら、秀夫は再び深呼吸をする。この瞬間からの道のりを思い描く。</p>
+
+        <p>「hide」から「hideo」へ。隠れることと、現れること。</p>
+        <p>父・宏夫との距離が近くなった気がする。「ひろお」と「ひでお」という名字を受け継ぎつつも、「秀」という字は彼自身への指示でもあるように感じた。</p>
+
+        <p>コンクリートの上を滑るように流れていく雨粒。その先には何も見えない。</p>
+        <p>だが、それは遠くにあるわけではなく、目の前の画面に確かに存在する。「HIDEO」と刻まれる文字列がそれを示していた。</p>
+        <p>秀夫の手は止まらない。「Hack. Infrastructure. Deep」</p>
+        <p>一つずつキーボードを叩き、「Empathy」「Origin」と続く。</p>
+
+        <p>「全て始まる」</p>
+        <p>彼の声は今、確信に満ちていた。5文字を全部打った瞬間から、これまでとは異なる道が広がっていることに気づく。</p>
+        <p>それは父からの指示であり、また自身への挑戦でもあった。「宏夫」という名前を受け継いだ息子として、「秀夫」の役割も果たす。</p>
+
+        <p>「ひろお。ひでお」</p>
+        <p>携帯を握り締めながら、彼は静かに微笑んだ。</p>
+        <p>雨粒がコンクリート表面から反射する光と自分自身を見つめる。「宏」と「秀」から始まった長い物語がここへと繋がっている。</p>
+
+        <p>そして秀夫は自分の名前を受け入れた。それが父からの遺産であり、また新しい道のりの出発点であることを理解した。</p>
+        <p>HIDEOという文字列を見つめながら彼は歩き出す。「今度こそ、真っ直ぐに」</p>
+        <p>雨粒とコンクリートとの接触音が遠くへ流れていく。</p>
+
+        <p>夜空を映す静かな公園。その先には何も見えないだけれど、それはただまだ始まったばかりの道程だった。</p>
+        <p>「ひろお。ひでお」という名前は深淵に落ちていく水滴のように、一つずつ彼の中に染み込んでいった。</p>
+        <p>新たな一歩が始まる夜が訪れた。「HIDEO」</p>
+        <p>その文字列を見据えながら秀夫は静かに公園を出て行った。</p>
+
+        <p>コンクリートの上から反射する雨粒。それを追うようにして公園から消えていく彼の後ろ姿——</p>
+
+        <p>遠くへと流れていく音だけが、この瞬間を証明していた。</p>
+      </div>
+    </section>
+    <section class="chapter" id="chapter-10">
+      <div class="chapter-header">
+        <span class="chapter-number">第10章</span>
+        <h2 class="chapter-title">高橋秀夫</h2>
+      </div>
+      
+      <div class="chapter-body">
+        <p>静寂が室内を満たす。深夜の二時、月光が薄いカーテンを通して部屋に差し込んでいた。コーヒーの香りと冷たい空気が混ざる。モニターから浮かび上がる青白い影。秀夫はその光の中、机の引き出しを開けた。</p>
+
+        <p>古い写真が静かに音を立てて現れた。</p>
+        <p>父・宏夫。55歳の姿。いつもと同じ笑顔。</p>
+        <p>手には何かを作り出そうとする形勢だった。</p>
+        <p>同じような手を持つ息子と比べる。</p>
+        <p>秀夫はその写真を立てる。モニターの横。</p>
+
+        <p>目を閉じると、聞こえるはずのない声が響いた。</p>
+        <p>「秀夫」と呼ぶ父の低い声。「お前の名前は俺がつけた」</p>
+        <p>静かな空間に響く言葉たち。</p>
+
+        <p>父は続け、「宏という字は広い土地を作る。秀は穂が出る」</p>
+        <p>「あなたの次には何かが始まるべきだと思っていた」</p>
+        <p>笑顔と共に告げる。</p>
+        <p>秀夫は目を開け、写真の父を見た。</p>
+        <p>33年経っても変わらぬ微笑み。</p>
+
+        <p>朝が訪れる。施設へ向かう車窓から見える街並み。静かな雨音に紛れて聞こえるのは母・千代子の声ではない。</p>
+        <p>施設につくと、彼女はいつもの場所で寝ていた。</p>
+        <p>秀夫が手を握ると、指先だけ動き出した。</p>
+
+        <p>「俺、親父の続きやるよ」と息子が言う。</p>
+        <p>目を開けた千代子。何も告げない。</p>
+        <p>ただぎゅっと握り返したように思えた。</p>
+
+        <p>宏夫から受け継いだ名前は、次世代へとつながる橋となることを示すものだった。「秀」の穂が出るように。</p>
+        <p>その母・千代子もまた「千」という名字で、千の代をつないでいく存在。</p>
+        <p>父→息子→そして先々。</p>
+
+        <p>部屋に戻った秀夫は再びモニター前に座る。</p>
+        <p>笑顔を見せる写真が横に置かれる。</p>
+        <p>新しいコミットメッセージを打たれたキー音。静かな響き。</p>
+        <p>「意味生成文明、起動」</p>
+        <p>高い場所から橋を架けろと父からの示唆。</p>
+
+        <p>秀夫は立ち上がり、窓の外を見る。</p>
+        <p>夜明け前の空には新たな光が差し込んでいた。</p>
+        <p>名前と共に始まる新しい日。</p>
+        <p>その名前で自分が何者であるか。全てそこに詰まっていた。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>高橋秀夫 ── 名前が物語になる時</p>
+    <p>Generated locally with Ollama + Stable Diffusion</p>
+  </footer>
+
+
+  <button class="tts-fab" id="ttsFab" onclick="ttsToggle()" title="Read aloud">
+    <span id="ttsFabIcon">&#x1f50a;</span>
+  </button>
+  <div class="tts-bar" id="ttsBar">
+    <button onclick="ttsPause()" id="ttsPauseBtn">&#x23f8;</button>
+    <button onclick="ttsStop()">&#x23f9;</button>
+    <button onclick="ttsPrev()">&#x23ee;</button>
+    <button onclick="ttsNext()">&#x23ed;</button>
+    <span class="tts-info" id="ttsInfo">Ready</span>
+    <span class="tts-speed">
+      <input type="range" id="ttsSpeed" min="0.5" max="2.0" step="0.1"
+             value="1.0" onchange="ttsSetSpeed(this.value)" />
+      <span id="ttsSpeedVal">1.0x</span>
+    </span>
+  </div>
+
+  <button class="mode-toggle" onclick="toggleMode()">🌗 表示切替</button>
+
+  <script>
+    // Reading mode
+    function toggleMode() {
+      document.body.classList.toggle('light');
+      localStorage.setItem('mode', document.body.classList.contains('light') ? 'light' : 'dark');
+    }
+    if (localStorage.getItem('mode') === 'light') document.body.classList.add('light');
+
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement;
+      const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+      document.getElementById('progress').style.width = pct + '%';
+    });
+
+    // === TTS (Web Speech API) ===
+    const synth = window.speechSynthesis;
+    let ttsChs = [], ttsI = 0, ttsRate = 1.0, ttsOn = false, ttsPd = false;
+
+    document.querySelectorAll('.chapter').forEach((sec, i) => {
+      const b = sec.querySelector('.chapter-body');
+      const t = sec.querySelector('.chapter-title');
+      if (b) ttsChs.push({
+        title: t ? t.textContent : ('Ch.' + (i+1)),
+        text: b.textContent.trim(), el: sec
+      });
+    });
+
+    function ttsToggle() {
+      if (!synth) { alert('Speech not supported'); return; }
+      if (ttsOn) { ttsStop(); return; }
+      const sy = window.scrollY + window.innerHeight / 3;
+      let cl = 0;
+      ttsChs.forEach((c, i) => { if (c.el.offsetTop <= sy) cl = i; });
+      ttsI = cl; ttsOn = true; ttsPd = false;
+      document.getElementById('ttsFab').classList.add('speaking');
+      document.getElementById('ttsFabIcon').innerHTML = '&#x23f9;';
+      document.getElementById('ttsBar').classList.add('active');
+      _ttsRead();
+    }
+
+    function _ttsRead() {
+      if (ttsI >= ttsChs.length) { ttsStop(); return; }
+      synth.cancel();
+      const ch = ttsChs[ttsI];
+      document.getElementById('ttsInfo').textContent = ch.title;
+      ch.el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Split by Japanese sentence endings for reliable playback
+      const sents = ch.text.match(/[^。！？
+]+[。！？]?/g) || [ch.text];
+      let si = 0;
+
+      function next() {
+        if (!ttsOn) return;
+        if (si >= sents.length) {
+          ttsI++;
+          if (ttsI < ttsChs.length) setTimeout(_ttsRead, 800);
+          else ttsStop();
+          return;
+        }
+        const u = new SpeechSynthesisUtterance(sents[si].trim());
+        u.lang = 'ja-JP'; u.rate = ttsRate;
+        const vs = synth.getVoices();
+        const jv = vs.find(v => v.lang && v.lang.startsWith('ja'));
+        if (jv) u.voice = jv;
+        u.onend = () => { si++; next(); };
+        u.onerror = () => { si++; next(); };
+        synth.speak(u);
+      }
+      next();
+    }
+
+    function ttsPause() {
+      if (!ttsOn) return;
+      if (ttsPd) {
+        synth.resume(); ttsPd = false;
+        document.getElementById('ttsPauseBtn').innerHTML = '&#x23f8;';
+      } else {
+        synth.pause(); ttsPd = true;
+        document.getElementById('ttsPauseBtn').innerHTML = '&#x25b6;';
+      }
+    }
+
+    function ttsStop() {
+      synth.cancel(); ttsOn = false; ttsPd = false;
+      document.getElementById('ttsFab').classList.remove('speaking');
+      document.getElementById('ttsFabIcon').innerHTML = '&#x1f50a;';
+      document.getElementById('ttsBar').classList.remove('active');
+      document.getElementById('ttsInfo').textContent = 'Ready';
+      document.getElementById('ttsPauseBtn').innerHTML = '&#x23f8;';
+    }
+
+    function ttsNext() { if (ttsOn && ttsI < ttsChs.length - 1) { ttsI++; _ttsRead(); } }
+    function ttsPrev() { if (ttsOn && ttsI > 0) { ttsI--; _ttsRead(); } }
+    function ttsSetSpeed(v) {
+      ttsRate = parseFloat(v);
+      document.getElementById('ttsSpeedVal').textContent = v + 'x';
+    }
+    if (synth) synth.onvoiceschanged = () => synth.getVoices();
+
+  </script>
+</body>
+</html>
