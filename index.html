@@ -150,7 +150,7 @@
     }
     .char-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 14px;
     }
     .char-card {
@@ -166,11 +166,27 @@
       color: var(--gold);
       margin-bottom: 4px;
     }
-    .char-role {
+    .char-meta {
       font-family: var(--sans);
       font-size: 0.75rem;
       color: var(--accent);
       margin-bottom: 8px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+    .char-meta span {
+      background: rgba(74,158,255,0.1);
+      padding: 1px 8px;
+      border-radius: 4px;
+    }
+    .char-appearance {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 6px;
+      border-left: 2px solid var(--chapter-border);
+      padding-left: 10px;
     }
     .char-desc {
       font-size: 0.85rem;
@@ -370,7 +386,12 @@
     <div class="char-grid">
       <div class="char-card">
         <div class="char-name">高橋秀夫（たかはし・ひでお）</div>
-        <div class="char-role">主人公</div>
+        <div class="char-meta"><span>主人公</span><span>56歳</span></div>
+        <div class="char-appearance">深夜のモニター光に照らされた横顔。眼鏡。無精髭。
+カーディガンにTシャツ。コーヒーカップ。
+父・宏夫に似てきた。最近、鏡を見るとそう思う。
+手の形が特に似ている。キーボードを叩く手。
+父はその手で何を作っていたのか。もう聞けない。</div>
         <div class="char-desc">速さの鬼。AIで世界を量産する。
 だが画面の裏に隠れている。顔も名前も出さない。
 &quot;hide&quot;の男。まだ「秀でる」の本義に気づいていない。
@@ -380,7 +401,11 @@
       </div>
       <div class="char-card">
         <div class="char-name">高橋宏夫（たかはし・ひろお）</div>
-        <div class="char-role">父 / 名付け親 / 不在の中心</div>
+        <div class="char-meta"><span>父 / 名付け親 / 不在の中心</span><span>享年55（平成5年・1993年没）</span></div>
+        <div class="char-appearance">記憶の中の父。輪郭はもう曖昧。
+でも手の形だけ覚えている。大きくて、指が長くて。
+秀夫と同じ手。
+写真の中の父。秀夫の今より若い。永遠に55歳。</div>
         <div class="char-desc">息子に「秀夫」と名づけた男。
 「宏」は広い。「秀」は穂が出る。
 広い土地に穂を植えた。そして土地のまま逝った。
@@ -390,7 +415,11 @@
       </div>
       <div class="char-card">
         <div class="char-name">高橋千代子（たかはし・ちよこ）</div>
-        <div class="char-role">母 / 千の世代をつなぐ人</div>
+        <div class="char-meta"><span>母 / 千の世代をつなぐ人</span><span>80代</span></div>
+        <div class="char-appearance">寝たきり。白い髪。白いシーツ。
+目は時々開く。秀夫が来ると指が少し動く。
+言葉はもう多くない。でもいる。ここにいる。
+宏夫の記憶を、体の中に抱えたまま。</div>
         <div class="char-desc">千代＝千の世代。子＝子供。千の世代をつなぐ子。
 宏夫と秀夫をつないでいる。名前を、記憶を、血を。
 寝たきりでも途切れない。千代子がいる限り、高橋は続く。
@@ -398,7 +427,9 @@
       </div>
       <div class="char-card">
         <div class="char-name">最初のユーザー</div>
-        <div class="char-role">橋の対岸にいた人</div>
+        <div class="char-meta"><span>橋の対岸にいた人</span><span>不明</span></div>
+        <div class="char-appearance">顔は見えない。画面の向こう。
+「これは、私の話だ。」と書いた人。</div>
         <div class="char-desc">秀夫が架けた橋を、最初に渡ってきた人。
 </div>
       </div>
